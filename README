@@ -1,0 +1,15 @@
+README fitxategi honetan forondarena.net webguneko aplikazioen deskribapen laburra aurki daiteke.
+ 
+This is the README file describing the software available at forondarena.net.
+
+
+findASN.pl:
+	Aplikazio txiki honek argumentu bezala emandako fitxategian dauden IP helbideen ASN zenbakia eta herrialdea pantailaratzen du. Gainera, fitxategiko ASN bakoitzak zenbat IP dituen ere erakusten du.
+	ASN zenbaki bat askotan agertu bada, lurraldeaz aparte enpresaren informazioa ere ematen du.
+
+
+	This utility takes a file as an argument and gives the ASN number and the country of the addresses included. It also shows the amount of IPs that are part of each ASN in the file.
+	If an ASN number is listed more than n times, then it will also report the owner of the ASN.
+
+
+
