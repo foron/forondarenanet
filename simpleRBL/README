@@ -1,8 +1,18 @@
-simplerbl.pm: Azpiegituraren spamassassin modulua da hau. Jasotako posta elektroniko bakoitzarekin exekutatzen da, eta informazio erabilgarria gordetzen du. Gero beste script batek gordetako datu horiek aztertu eta zer egin erabakiko du. Sisteman instalatzeko beste spamassassin pluginak dauden tokian kopiatu behar da.
+simplerbl.pm: Azpiegituraren spamassassin modulua da hau. Jasotako posta elektroniko bakoitzarekin exekutatzen da, eta spam mezuen inguruko informazioa gordetzen du. Gero, beste script batek (worker) gordetako datu horiek aztertu eta zer egin erabakitzen du. Sisteman instalatzeko beste spamassassin pluginak dauden tokian kopiatu behar da.
 
 simplerbl.cf: Moduluaren konfigurazio fitxategia da hau. Kontutan izan behar da spamassassin fitxategiak gordetzeko erabiltzen diren bi direktorioetan idazteko gauza izan behar dela. Adibide honetan:
 		- simplerbl_redir /var/log/spamassassin/records   (hemen spam mezuen (5 puntu baino gehiago) informazioa gordetzen da xml fitxategietan (IP, mail from, ...).
 		- simplerbl_evdir /var/log/spamassassin/evidences (hemen jasotako spam mezuen header lerroak gordetzen dira. Gero IP helbideen arduradunei abisua emango zaie arazoa aztertu dezaten).
+
+simplerbl.cfg: Sistemaren konfigurazio fitxategi nagusia.  [DNSFile] eta [ReportGenerator] atalak igo gabe daude.
+		- [Worker]: Worker scriptaren konfigurazio zatia.
+		- [DNSFile]: DNS zerrenda eraikitzen duen scriptaren konfigurazioa.
+		- [ReportGenerator]: Zerrendatutako helbideen arduradunei abisuak bidaltzen dizkien scriptaren konfigurazio zatia da hau (ARF, ...).
+
+simplerblWorker.pl: Adibide txiki honek spamassassin bidez gordetako informazioa aztertu eta datu basean sartzen du. Postgresql erabiltzen du, baina sistemak ez du beste datu base kudeaketa sistema baten erabilera galerazten duen ezer berezirik. Oso adibide sinplea da: IP helbidea "ezaguna" bada bere kontagailua igotzen dugu. Berria bada datu basean sartzen da. Hiru zerrenda desberdin erabiltzen dira (low, medium, high) lortutako spam puntuen arabera. Errealitatean seguraski erabilgarriago izango litzateke beste sailkapen modu bat. Esaterako, aktibatutako erregelen arabera:
+	- 127.0.0.2: Spam arrunta (drogak,...). Datu basearen informazioa rblra eramaten duen scriptak n spam mezu beharko lituzke mota honetako IP bat blokeatzeko.
+	- 127.0.0.3: Banku, kreditu txartelak, .... n/2 alditan agertutako IP bat blokeatuko litzateke.
+	- 127.0.0.4: .... Scriptak IP bat behin agertzearekin nahikoa luke helbidea behin betirako blokeatzeko.
 
 ---
 
@@ -12,5 +22,12 @@ simplerbl.cf: This is the main spamassassin configuration file. Just keep in min
 		- simplerbl_redir /var/log/spamassassin/records   (xml files with the data (IP, mail from, triggered SA rules, date, ...) from spam messages (above 5 points in this example)).
 		- simplerbl_evdir /var/log/spamassassin/evidences (Headers of stored spam messages to be reported back to the mail-abuse team of the spammer's IP address owner).
 
-I have also finished the worker process that checks these files and chooses whether to store the records in a database, but I'm not uploading it (yet) until I write more documentation.
+simplerbl.cfg: Main configuration file. [DNSFile] and [ReportGenerator] are still not uploaded.
+		- [Worker]: This is the cofiguration of the worker script.
+		- [DNSFile]: This is the configuration of the script that generates de rbldnsd files.
+		- [ReportGenerator]: This is the configuration of the script that notifies about spam to IP address owners. (ARF, ...).
 
+simplerblWorker.pl: Example worker script that reads the records created by spamassassin and stores them in a database. It currently uses postgresql, but there's nothing special in the database schema that would prevent anyone from using mysql (for example). The script is very simple: It stores new IP addresses in the database, and increases the counter for the already listed. We manage three different lists: low, medium and high, depending on the spam score, that will then be translated to independent rbl lists (like sbl, pbl, xbl, ..., but with low, medium, high). If I had to make the system useful, I would probably use a different approach. I would classify according to the spamassassin rules triggered by the message, for example:
+	- 127.0.0.2: Regular spam (drugs, ...). The database-to-rbl script would list IPs after n spam messages.
+	- 127.0.0.3: Bank, credit card, .... The script would list IPs after n/2 messages.
+	- 127.0.0.4: .... The script would list IPs after 1 message, and mark them permanent.
