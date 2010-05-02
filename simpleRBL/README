@@ -1,0 +1,16 @@
+simplerbl.pm: Azpiegituraren spamassassin modulua da hau. Jasotako posta elektroniko bakoitzarekin exekutatzen da, eta informazio erabilgarria gordetzen du. Gero beste script batek gordetako datu horiek aztertu eta zer egin erabakiko du. Sisteman instalatzeko beste spamassassin pluginak dauden tokian kopiatu behar da.
+
+simplerbl.cf: Moduluaren konfigurazio fitxategia da hau. Kontutan izan behar da spamassassin fitxategiak gordetzeko erabiltzen diren bi direktorioetan idazteko gauza izan behar dela. Adibide honetan:
+		- simplerbl_redir /var/log/spamassassin/records   (hemen spam mezuen (5 puntu baino gehiago) informazioa gordetzen da xml fitxategietan (IP, mail from, ...).
+		- simplerbl_evdir /var/log/spamassassin/evidences (hemen jasotako spam mezuen header lerroak gordetzen dira. Gero IP helbideen arduradunei abisua emango zaie arazoa aztertu dezaten).
+
+---
+
+simplerbl.pm: This is the spamassassin plugin that checks incoming emails, and stores evidences and records in the filesystem to be processed later by a worker process. You should place this module wherever your spamassasin plugins are in your system.
+
+simplerbl.cf: This is the main spamassassin configuration file. Just keep in mind that the two directories where the plugin stores data must be writeable by the user running spamassassin. The example file uses:
+		- simplerbl_redir /var/log/spamassassin/records   (xml files with the data (IP, mail from, triggered SA rules, date, ...) from spam messages (above 5 points in this example)).
+		- simplerbl_evdir /var/log/spamassassin/evidences (Headers of stored spam messages to be reported back to the mail-abuse team of the spammer's IP address owner).
+
+I have also finished the worker process that checks these files and chooses whether to store the records in a database, but I'm not uploading it (yet) until I write more documentation.
+
