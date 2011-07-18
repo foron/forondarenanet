@@ -28,8 +28,4 @@ Would yield the following json data:
 ...
 {codigo: "open", proceso: "smtpd", pid: 5817, ppid: 1082, tid: 5817, fichero: "/etc/hosts", descriptor: 12, date: 1310920975000}
 {codigo: "close", proceso: "smtpd", pid: 5817, ppid: 1082, tid: 5817, fichero: "/etc/hosts", descriptor: 12, date: 0}
-{codigo: "open", proceso: "smtpd", pid: 5817, ppid: 1082, tid: 5817, fichero: "/etc/hosts", descriptor: 12, date: 1310920975000}
-{codigo: "close", proceso: "smtpd", pid: 5817, ppid: 1082, tid: 5817, fichero: "/etc/hosts", descriptor: 12, date: 0}
-{codigo: "open", proceso: "smtpd", pid: 5817, ppid: 1082, tid: 5817, fichero: "/etc/hosts", descriptor: 12, date: 1310920996152}
-{codigo: "close", proceso: "smtpd", pid: 5817, ppid: 1082, tid: 5817, fichero: "/etc/hosts", descriptor: 12, date: 0}
 ...
