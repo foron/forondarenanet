@@ -1,0 +1,35 @@
+monitorFicheros.stp
+-------------------
+
+Show files opened by parent and child processes.
+
+Example:
+
+Given a postfix master process:
+
+master─┬─pickup
+       │─qmgr
+       └─tlsmgr
+
+Running this:
+
+stap -v monitorFicheros.stp $(pidof master)
+
+or setting a file path to monitor:
+
+stap -v monitorFicheros.stp $(pidof master) /etc
+
+or more than one:
+
+stap -v monitorFicheros.stp $(pidof master) /etc /usr/lib
+
+Would yield the following json data:
+
+...
+{codigo: "open", proceso: "smtpd", pid: 5817, ppid: 1082, tid: 5817, fichero: "/etc/hosts", descriptor: 12, date: 1310920975000}
+{codigo: "close", proceso: "smtpd", pid: 5817, ppid: 1082, tid: 5817, fichero: "/etc/hosts", descriptor: 12, date: 0}
+{codigo: "open", proceso: "smtpd", pid: 5817, ppid: 1082, tid: 5817, fichero: "/etc/hosts", descriptor: 12, date: 1310920975000}
+{codigo: "close", proceso: "smtpd", pid: 5817, ppid: 1082, tid: 5817, fichero: "/etc/hosts", descriptor: 12, date: 0}
+{codigo: "open", proceso: "smtpd", pid: 5817, ppid: 1082, tid: 5817, fichero: "/etc/hosts", descriptor: 12, date: 1310920996152}
+{codigo: "close", proceso: "smtpd", pid: 5817, ppid: 1082, tid: 5817, fichero: "/etc/hosts", descriptor: 12, date: 0}
+...
