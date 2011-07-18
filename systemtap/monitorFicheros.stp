@@ -1,0 +1,80 @@
+global procesoArgumento
+global tablaProcesos
+global tablaFicheros
+global pwd = "__none__"
+global ficherosEnPath
+global numeroPaths = 0
+
+probe begin {
+	# Idealmente deberia ver si el pid es valido, o incluso convertir desde un execname.
+	procesoArgumento = $1
+	printf ("El pid que vamos a tratar es %d\n", procesoArgumento);
+	if (argc > 1) {
+		for (i=2; i <= argc; i++) {
+			ficherosEnPath[argv[i]] = argv[i]
+			numeroPaths += 1
+		}
+	}
+}
+
+probe syscall.open.return {
+	proceso = pid()
+	padre = ppid()
+	hilo = tid()
+	ejecutable = execname()
+	insertarEnTabla = 0
+
+	if ( (procesoArgumento == proceso) || (procesoArgumento == padre) || (procesoArgumento == hilo) ) {
+		if ( (procesoArgumento == proceso) && (env_var("PWD") != "") ) {
+			pwd = env_var("PWD")
+		}
+		localpwd = (isinstr(env_var("PWD"), "/"))?env_var("PWD"):pwd;
+
+		filename = user_string($filename)
+		descriptor = $return
+
+		filename = (substr(filename, 0, 1) == "/")?filename:localpwd . "/" . filename;
+
+		if ([proceso,padre,hilo,descriptor] in tablaProcesos)  {
+			printf ("{codigo: \"error\", proceso: \"%s\", pid: %d, ppid: %d, tid: %d, fichero: \"%s\", descriptor: %d}\n", ejecutable, proceso, padre, hilo, filename, descriptor)
+		} else {
+			if (descriptor >= 0) {
+				if (numeroPaths > 0 ) {
+					foreach (ruta in ficherosEnPath) {
+						if (substr(filename, 0, strlen(ruta)) == ruta) {
+							insertarEnTabla = 1
+							break
+						}
+					}
+				}
+				if ( (insertarEnTabla == 1) || (numeroPaths == 0) ) {
+					tablaProcesos[proceso,padre,hilo,descriptor] = gettimeofday_ms()
+					tablaFicheros[proceso,padre,hilo,descriptor] = filename
+					printf ("{codigo: \"open\", proceso: \"%s\", pid: %d, ppid: %d, tid: %d, fichero: \"%s\", descriptor: %d, date: %d}\n", ejecutable, proceso, padre, hilo, filename, descriptor, tablaProcesos[proceso,padre,hilo,descriptor])
+				}
+			}
+		}
+	}
+}
+
+probe syscall.close.return {
+	proceso = pid()
+	padre = ppid()
+	hilo = tid()
+	descriptor = $fd
+	ejecutable = execname()
+
+	if ( ( procesoArgumento == proceso ) || ( procesoArgumento == padre ) || (procesoArgumento == hilo ) ) {
+		if ([proceso,padre,hilo,descriptor] in tablaProcesos) {
+			filename = tablaFicheros[proceso,padre,hilo,descriptor]
+			date = gettimeofday_ms() - tablaProcesos[proceso,padre,hilo,descriptor]
+			printf ("{codigo: \"close\", proceso: \"%s\", pid: %d, ppid: %d, tid: %d, fichero: \"%s\", descriptor: %d, date: %d}\n", ejecutable, proceso, padre, hilo, filename, descriptor, date)
+			delete tablaProcesos[proceso,padre,hilo,descriptor]
+			delete tablaFicheros[proceso,padre,hilo,descriptor]
+		}
+	}
+}
+
+#probe end {
+#
+#}
