@@ -54,6 +54,15 @@ probe kprocess.exec {
 	}
 }
 
+probe kprocess.exit {
+	pid = pid ()
+
+	if (pid in pidNumericos) {
+		printf ("Borrando %d.\n", pid)
+		delete pidNumericos[pid]
+	}
+}
+
 probe syscall.open.return {
 	proceso = pid()
 	padre = ppid()
