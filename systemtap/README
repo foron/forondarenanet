@@ -1,7 +1,15 @@
 monitorFicheros.stp
 -------------------
 
-Show files opened by parent and child processes.
+Show files opened by process trees, including those not yet running. Output can be limited to certain paths.
+
+Input may be any number of:
+
+  - List of known pids (numeric).
+  - List of executables not yet running (strings not starting with "/"). Strings are "regexp"ed, so that firefox in the cmdline should also match firefox-bin.
+  - List of absolute paths to monitor (strings starting with "/"). Subdirectories are included.
+
+  Either a pid or a executable is required.
 
 Example:
 
@@ -13,15 +21,15 @@ master─┬─pickup
 
 Running this:
 
-stap -v monitorFicheros.stp $(pidof master)
+  stap -v monitorFicheros.stp $(pidof master)
 
 or setting a file path to monitor:
 
-stap -v monitorFicheros.stp $(pidof master) /etc
+  stap -v monitorFicheros.stp $(pidof master) /etc
 
 or more than one:
 
-stap -v monitorFicheros.stp $(pidof master) /etc /usr/lib
+  stap -v monitorFicheros.stp $(pidof master) /etc /usr/lib
 
 Would yield the following json data:
 
@@ -29,3 +37,18 @@ Would yield the following json data:
 {codigo: "open", proceso: "smtpd", pid: 5817, ppid: 1082, tid: 5817, fichero: "/etc/hosts", descriptor: 12, date: 1310920975000}
 {codigo: "close", proceso: "smtpd", pid: 5817, ppid: 1082, tid: 5817, fichero: "/etc/hosts", descriptor: 12, date: 0}
 ...
+
+Other examples:
+
+Monitor multiple pids:
+
+  stap -v monitorFicheros.stp $(pidof master) $(pidof mingetty)
+
+Monitor both known pids and the command "pstree" when executed:
+
+  stap  -v monitorFicheros.stp $(pidof mingetty) pstree
+
+Just two paths:
+
+  stap  -v monitorFicheros.stp $(pidof mingetty) pstree /usr/lib64/ /etc
+
