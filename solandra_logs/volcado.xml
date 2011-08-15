@@ -1,0 +1,130 @@
+<add allowDups="false">
+        <doc>
+                <field name="in_from">origenspam@example.com</field>
+                <field name="id">b309842a-1cf7-11e0-9759-f896edbeae14</field>
+                <field name="in_fentrada">2011-04-30T00:17:24Z</field>
+                <field name="in_size">941</field>
+                <field name="in_to">destino1@target.example.net</field>
+                <field name="in_fsalida">2011-04-30T00:17:25Z</field>
+                <field name="in_estado">0 - 192.168.10.24_accepted_message./Remote_host_said:_250_2.0.0_Ok:_queued_as_DF2BD74CA71/</field>
+                <field name="in_to_adicional">destino1@target.example.net</field>
+                <field name="in_to_adicional">destino2@target.example.net</field>
+                <field name="in_to_adicional">destino3@target.example.net</field>
+                <field name="in_to_adicional">destino4@target.example.net</field>
+        </doc>
+        <doc>
+                <field name="in_from">origenspam@example.com</field>
+                <field name="id">b30991b7-1cf7-11e0-9759-e819bb7f7b58</field>
+                <field name="in_fentrada">2011-04-30T00:17:24Z</field>
+                <field name="in_size">941</field>
+                <field name="in_to">destino2@target.example.net</field>
+                <field name="in_fsalida">2011-04-30T00:17:24Z</field>
+                <field name="in_estado">0 - 192.168.10.24_accepted_message./Remote_host_said:_250_2.0.0_Ok:_queued_as_A945A21CD6B/</field>
+                <field name="in_to_adicional">destino1@target.example.net</field>
+                <field name="in_to_adicional">destino2@target.example.net</field>
+                <field name="in_to_adicional">destino3@target.example.net</field>
+                <field name="in_to_adicional">destino4@target.example.net</field>
+        </doc>
+        <doc>
+                <field name="in_from">origenspam@example.com</field>
+                <field name="id">b3099fc7-1cf7-11e0-9759-9423aed9d9eb</field>
+                <field name="in_fentrada">2011-04-30T00:17:24Z</field>
+                <field name="in_size">941</field>
+                <field name="in_to">destino3@target.example.net</field>
+                <field name="in_fsalida">2011-04-30T00:17:25Z</field>
+                <field name="in_estado">0 - 192.168.10.24_accepted_message./Remote_host_said:_250_2.0.0_Ok:_queued_as_DB11471C67B/</field>
+                <field name="in_to_adicional">destino1@target.example.net</field>
+                <field name="in_to_adicional">destino2@target.example.net</field>
+                <field name="in_to_adicional">destino3@target.example.net</field>
+                <field name="in_to_adicional">destino4@target.example.net</field>
+        </doc>
+        <doc>
+                <field name="in_from">origenspam@example.com</field>
+                <field name="id">b309acb4-1cf7-11e0-9759-ad7e004ee494</field>
+                <field name="in_fentrada">2011-04-30T00:17:24Z</field>
+                <field name="in_size">941</field>
+                <field name="in_to">destino4@target.example.net</field>
+                <field name="in_fsalida">2011-04-30T00:17:24Z</field>
+                <field name="in_estado">0 - 192.168.10.24_accepted_message./Remote_host_said:_250_2.0.0_Ok:_queued_as_ABE586284B0/</field>
+                <field name="in_to_adicional">destino1@target.example.net</field>
+                <field name="in_to_adicional">destino2@target.example.net</field>
+                <field name="in_to_adicional">destino3@target.example.net</field>
+                <field name="in_to_adicional">destino4@target.example.net</field>
+        </doc>
+        <doc>
+                <field name="in_from">cliente1@example.net</field>
+                <field name="id">b43de232-1cf7-11e0-9759-d71ac36a357f</field>
+                <field name="in_fentrada">2011-04-30T00:04:41Z</field>
+                <field name="in_size">6077</field>
+                <field name="in_to">greylister@example.com</field>
+                <field name="in_fsalida">2011-04-30T00:07:27Z</field>
+                <field name="in_estado">0 - 172.16.0.14_does_not_like_recipient./Remote_host_said:_450_4.7.1_&lt;cliente1@example.net&gt;:_Sender_address_rejected:_Message_delayed_now.Retry_later,_please./Giving_up_on_172.16.0.14./</field>
+                <field name="in_fsalida">2011-04-30T00:12:38Z</field>
+                <field name="in_estado">1 - 172.16.0.14_does_not_like_recipient./Remote_host_said:_450_4.7.1_&lt;cliente1@example.net&gt;:_Sender_address_rejected:_Message_delayed_now._Retry_later,_please./Giving_up_on_172.16.0.14./</field>
+                <field name="in_fsalida">2011-04-30T00:31:53Z</field>
+                <field name="in_estado">2 - 172.16.0.14_does_not_like_recipient./Remote_host_said:_451_4.3.0_&lt;greylister@example.com&gt;:_Temporary_lookup_failure/Giving_up_on_172.16.0.14./</field>
+                <field name="in_fsalida">2011-04-30T01:04:43Z</field>
+                <field name="in_estado">3 - 172.16.0.14_accepted_message./Remote_host_said:_250_2.0.0_Ok:_queued_as_CB6A3D4A217/</field>
+                <field name="in_to_adicional">greylister@example.com</field>
+        </doc>
+        <doc>
+                <field name="in_from">spammer2@example.org</field>
+                <field name="id">b43e05b2-1cf7-11e0-9759-e59c724a2e4e</field>
+                <field name="in_fentrada">2011-04-30T01:04:46Z</field>
+                <field name="in_size">897</field>
+                <field name="in_to">marketing@example.org</field>
+                <field name="in_fsalida">2011-04-30T01:04:46Z</field>
+                <field name="in_estado">0 - 192.168.10.24_accepted_message./Remote_host_said:_250_2.0.0_Ok:_queued_as_BD2929A83E9/</field>
+                <field name="in_to_adicional">marketing@example.org</field>
+        </doc>
+        <doc>
+                <field name="in_from">info@acme.example.com</field>
+                <field name="id">b2651cef-1cf7-11e0-9759-f79e9509017c</field>
+                <field name="in_fentrada">2011-04-29T23:57:02Z</field>
+                <field name="in_size">846</field>
+                <field name="in_to">rrhh@interno.example.com</field>
+                <field name="in_fsalida">2011-04-29T23:57:02Z</field>
+                <field name="in_estado">0 - 192.168.10.24_accepted_message./Remote_host_said:_250_2.0.0_Ok:_queued_as_127A325b471/</field>
+                <field name="in_to_adicional">rrhh@interno.example.com</field>
+        </doc>
+        <doc>
+                <field name="in_from">MAILER-DAEMON</field>
+                <field name="id">b26547de-1cf7-11e0-9759-9a6f6e8fd35a</field>
+                <field name="in_fentrada">2011-04-29T23:57:04Z</field>
+                <field name="in_size">831</field>
+                <field name="in_to">info@example.net</field>
+                <field name="in_fsalida">2011-04-29T23:57:04Z</field>
+                <field name="in_estado">0 - 192.168.10.24_accepted_message./Remote_host_said:_250_2.0.0_Ok:_queued_as_AC3D86A048E/</field>
+                <field name="in_to_adicional">info@example.net</field>
+        </doc>
+        <doc>
+                <field name="in_from">MAILER-DAEMON</field>
+                <field name="id">b276e316-1cf7-11e0-9759-e39ba809fe18</field>
+                <field name="in_fentrada">2011-04-29T23:59:26Z</field>
+                <field name="in_size">2951</field>
+                <field name="in_to">web@example.com</field>
+                <field name="in_fsalida">2011-04-29T23:59:26Z</field>
+                <field name="in_estado">0 - 192.168.10.24_does_not_like_recipient./Remote_host_said:_550_5.1.1_&lt;web@example.com&gt;:_Recipient_address_rejected:_User_unknown_in_virtual_mailbox_table/Giving_up_on_192.168.10.24./</field>
+                <field name="in_to_adicional">web@example.com</field>
+        </doc>
+        <doc>
+                <field name="in_from">envios@example.net</field>
+                <field name="id">b278bc2e-1cf7-11e0-9759-efbb4c34f005</field>
+                <field name="in_fentrada">2011-04-29T23:59:36Z</field>
+                <field name="in_size">126215</field>
+                <field name="in_to">info@interno.example.net</field>
+                <field name="in_fsalida">2011-04-29T23:59:36Z</field>
+                <field name="in_estado">0 - 192.168.10.24_accepted_message./Remote_host_said:_250_2.0.0_Ok:_queued_as_A1F321E821F/</field>
+                <field name="in_to_adicional">info@interno.example.net</field>
+        </doc>
+        <doc>
+                <field name="in_from">nospam@example.info</field>
+                <field name="id">b289c969-1cf7-11e0-9759-e819b3d89e65</field>
+                <field name="in_fentrada">2011-04-30T00:01:29Z</field>
+                <field name="in_size">8304</field>
+                <field name="in_to">info@target.example.com</field>
+                <field name="in_fsalida">2011-04-30T00:01:29Z</field>
+                <field name="in_estado">0 - 192.168.10.24_accepted_message./Remote_host_said:_250_2.0.0_Ok:_queued_as_3AFC1A03C8/</field>
+                <field name="in_to_adicional">info@target.example.com</field>
+        </doc>
+</add>
