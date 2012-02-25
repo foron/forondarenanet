@@ -1,0 +1,51 @@
+.\" Generated with Ronnjs 0.3.8
+.\" http://github.com/kapouer/ronnjs/
+.
+.TH "MAIN\.CF" "5" "February 2012" "" ""
+.
+.SH "NAME"
+\fBmain.cf\fR \-\- Configuración principal de Postfix
+.
+.SH "SYNOPSIS"
+\fBmain\.cf\fR \- Fichero de configuración principal de Postfix\.
+.
+.SH "DESCRIPTION"
+El fichero \fBmain\.cf\fR define gran parte de los cambios sobre la instalación base que se hacen a Postfix\. Por lo tanto, cualquier cambio que se realice en este fichero debe ser probado en servidores de pre producción\.
+.
+.P
+\fBmain\.cf\fR es gestionado por \fBpuppet(1)\fR\|\. Los cambios que se apliquen directamente sobre este fichero serán sobreescritos\.
+.
+.P
+En la siguiente lista se encuentran las modificaciones más significativas que se han ido aplicando al fichero:
+.
+.IP "\(bu" 4
+\fBmessage_size_limit\fR=20000:
+ Se aplicó este límite de 20000 bytes a la configuración bla bla bla\.
+.
+.IP "\(bu" 4
+\fBdovecot_destination_recipient_limit\fR=1:
+ Opción más segura para controlar las entregas locales bla bla bla\. El transport dovecot se define en \fBmaster\.cf(5)\fR
+.
+.IP "\(bu" 4
+\fBsmtpd_client_restrictions\fR=check\fIclient\fRaccess cdb:/etc/postfix/clientes\.out:
+ Se define el fichero \fBclientes\.out(5)\fR, como parte del grupo de restricciones en fase cliente, para rechazar aquellos clientes que no cumplan las normas de uso de la plataforma\.
+.
+.IP "" 0
+.
+.SH "INCIDENCIAS"
+1234 \fIhttp://bugtrack\.example\.com/?id=1234\fR \- Cliente x con problemas de envío\.
+.
+.P
+5678 \fIhttp://bugtrack\.example\.com/?id=5678\fR \- Cliente z que envía miles de mensajes spam\.
+.
+.SH "HISTORY"
+2012\-02\-20, Versión inicial\.
+.
+.SH "AUTHOR"
+2012, Forondarena\.net postmaster
+.
+.SH "COPYRIGHT"
+Forondarena\.net 
+.
+.SH "SEE ALSO"
+\fBpuppet(1)\fR, \fBmaster\.cf(5)\fR, \fBclientes\.out(5)\fR
