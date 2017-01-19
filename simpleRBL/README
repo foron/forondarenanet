@@ -1,21 +1,3 @@
-simplerbl.pm: Azpiegituraren spamassassin modulua da hau. Jasotako posta elektroniko bakoitzarekin exekutatzen da, eta spam mezuen inguruko informazioa gordetzen du. Gero, beste script batek (worker) gordetako datu horiek aztertu eta zer egin erabakitzen du. Sisteman instalatzeko beste spamassassin pluginak dauden tokian kopiatu behar da.
-
-simplerbl.cf: Moduluaren konfigurazio fitxategia da hau. Kontutan izan behar da spamassassin fitxategiak gordetzeko erabiltzen diren bi direktorioetan idazteko gauza izan behar dela. Adibide honetan:
-		- simplerbl_redir /var/log/spamassassin/records   (hemen spam mezuen (5 puntu baino gehiago) informazioa gordetzen da xml fitxategietan (IP, mail from, ...).
-		- simplerbl_evdir /var/log/spamassassin/evidences (hemen jasotako spam mezuen header lerroak gordetzen dira. Gero IP helbideen arduradunei abisua emango zaie arazoa aztertu dezaten).
-
-simplerbl.cfg: Sistemaren konfigurazio fitxategi nagusia.  [DNSFile] eta [ReportGenerator] atalak igo gabe daude.
-		- [Worker]: Worker scriptaren konfigurazio zatia.
-		- [DNSFile]: DNS zerrenda eraikitzen duen scriptaren konfigurazioa.
-		- [ReportGenerator]: Zerrendatutako helbideen arduradunei abisuak bidaltzen dizkien scriptaren konfigurazio zatia da hau (ARF, ...).
-
-simplerblWorker.pl: Adibide txiki honek spamassassin bidez gordetako informazioa aztertu eta datu basean sartzen du. Postgresql erabiltzen du, baina sistemak ez du beste datu base kudeaketa sistema baten erabilera galerazten duen ezer berezirik. Oso adibide sinplea da: IP helbidea "ezaguna" bada bere kontagailua igotzen dugu. Berria bada datu basean sartzen da. Hiru zerrenda desberdin erabiltzen dira (low, medium, high) lortutako spam puntuen arabera. Errealitatean seguraski erabilgarriago izango litzateke beste sailkapen modu bat. Esaterako, aktibatutako erregelen arabera:
-	- 127.0.0.2: Spam arrunta (drogak,...). Datu basearen informazioa rblra eramaten duen scriptak n spam mezu beharko lituzke mota honetako IP bat blokeatzeko.
-	- 127.0.0.3: Banku, kreditu txartelak, .... n/2 alditan agertutako IP bat blokeatuko litzateke.
-	- 127.0.0.4: .... Scriptak IP bat behin agertzearekin nahikoa luke helbidea behin betirako blokeatzeko.
-
----
-
 simplerbl.pm: This is the spamassassin plugin that checks incoming emails, and stores evidences and records in the filesystem to be processed later by a worker process. You should place this module wherever your spamassasin plugins are in your system.
 
 simplerbl.cf: This is the main spamassassin configuration file. Just keep in mind that the two directories where the plugin stores data must be writeable by the user running spamassassin. The example file uses:
